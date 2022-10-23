@@ -1,0 +1,138 @@
+.disable-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.nav-btn {
+  background-color: inherit;
+  box-shadow: 0px 0px 5px 0px;
+  border: 0;
+  border-radius: 35%;
+}
+
+.changelog {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px;
+  border-color: var(--bs-gray-700);
+  border-style: solid;
+  border-radius: 20px;
+  background-color: var(--bs-gray-dark);
+  max-width: 200px;
+  max-height: 140px;
+}
+
+.nav-btn:hover {
+  transform: scale(1.05);
+}
+
+.changelog-date {
+  color: green;
+  width: auto;
+  text-align: center;
+}
+
+.changelog-exercise {
+  width: auto;
+  padding-left: 20px;
+  text-transform: capitalize;
+  color: var(--bs-gray-400);
+  word-break: break-word;
+}
+
+.changelog-oldweight {
+  width: auto;
+  padding-left: 5px;
+  color: palevioletred;
+}
+
+.changelog-newweight {
+  width: auto;
+  padding-left: 5px;
+  color: greenyellow;
+}
+
+.nav-active {
+  background-color: var(--bs-gray-800);
+}
+
+.lang-btn {
+  background-color: inherit;
+  border: 0;
+  color: var(--bs-gray-600);
+  width: auto;
+  padding: 0;
+  height: 25px;
+}
+
+.day-dropdown {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--bs-gray-dark);
+}
+
+.day-dropdown:hover {
+  cursor: pointer;
+}
+
+.day-active {
+  background-color: var(--bs-gray-dark);
+}
+
+.day-ex-dropdown {
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--bs-gray-dark);
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+.weight-span {
+  color: var(--bs-gray-500);
+  padding-left: 20px;
+}
+
+.ex-btn {
+  background-color: inherit;
+  border: 0;
+  color: var(--bs-red);
+  padding-left: 10px;
+}
+
+.ex-btn-edit {
+  background-color: inherit;
+  border: 0;
+  color: var(--bs-gray-600);
+  padding-left: 10px;
+}
+
+.ex-btn-edit:hover {
+  cursor: pointer;
+}
+
+.ex-btn:hover {
+  cursor: pointer;
+}
+
+.add-ex-btn {
+  background-color: inherit;
+  border: #008000;
+  color: seagreen;
+  padding-left: 20px;
+}
+
+.add-ex-btn:hover {
+  cursor: pointer;
+}
+
+.add-ex-input {
+  width: 100%;
+  margin-bottom: 5px;
+}
+

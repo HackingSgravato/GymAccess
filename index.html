@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GymAccess</title>
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="assets/img/icons8-dumbbell-windows-11-color-180.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/icons8-dumbbell-windows-11-color-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/icons8-dumbbell-windows-11-color-32.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="assets/img/icons8-dumbbell-windows-11-color-180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/img/icons8-dumbbell-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/icons8-dumbbell-512.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div style="position: absolute;width: 100%;height: 100%;padding: 10px;">
+        <div style="height: calc(100% - 40px);margin-bottom: 5px;">
+            <div class="d-flex justify-content-center" style="height: 40px;width: 100%;gap: 10px;margin-bottom: 10px;"><button id="exercise-btn" class="nav-btn" type="button" onclick="showExercise();"><img class="disable-select" src="https://img.icons8.com/fluency/24/000000/dumbbell.png"/></button><button id="changelog-btn" class="nav-btn" type="button" onclick="showChangelog();"><img class="disable-select" src="https://img.icons8.com/fluency/24/000000/financial-changes.png"/></button></div>
+            <div id="exercise" class="disable-select" style="padding: 10px;height: calc(100% - 50px);scroll-behavior: smooth;overflow-x: hidden;"><div id="monday" class="day-dropdown">⏵ Monday</div><div id="ex-monday" class="day-ex-dropdown d-none"></div><div id="tuesday" class="day-dropdown">⏵ Tuesday</div><div id="ex-tuesday" class="day-ex-dropdown d-none"></div><div id="wednesday" class="day-dropdown">⏵ Wednesday</div><div id="ex-wednesday" class="day-ex-dropdown d-none"></div><div id="thursday" class="day-dropdown">⏵ Thursday</div><div id="ex-thursday" class="day-ex-dropdown d-none"></div><div id="friday" class="day-dropdown">⏵ Friday</div><div id="ex-friday" class="day-ex-dropdown d-none"></div><div id="saturday" class="day-dropdown">⏵ Saturday</div><div id="ex-saturday" name="saturday" class="day-ex-dropdown d-none"></div><div id="sunday" class="day-dropdown">⏵ Sunday</div><div id="ex-sunday" class="day-ex-dropdown d-none"></div></div>
+            <div class="d-flex justify-content-center d-none" id="changelog" style="padding: 20px;max-height: calc(100% - 50px);height: auto;gap: 10px;flex-wrap: wrap;scroll-behavior: smooth;overflow-x: hidden;"></div>
+        </div>
+        <div class="d-flex justify-content-center justify-content-lg-center disable-select">
+            <p style="margin-right: 9px;">Made with love by Paolo</p><a href="https://github.com/HackingSgravato" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-github" style="margin-top: 0px;">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg></a>
+        </div>
+    </div>
+    <div class="d-flex disable-select" style="position: absolute;left: 2%;top: 2%;"><button class="lang-btn" type="button" onclick="loadIt();">It</button><div style="color: var(--bs-gray-500); margin-left: 2px; margin-right: 2px; height: 20px;">/</div><button class="lang-btn" type="button" onclick="loadEn();">En</button></div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="add-ex-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="add-ex-modal-heading">Adding Exercise...</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"><input type="text" id="ex-name" class="add-ex-input" placeholder="Name"><input type="text" id="ex-weight" class="add-ex-input" placeholder="Weight"></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="button" onclick="addNewExercise();">Create</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="edit-ex-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="edit-ex-modal-heading">Editing Exercise...</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"><input type="text" id="edit-ex-weight" class="add-ex-input" placeholder="New Weight"></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="button" onclick="editExercise();">Edit</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/exercise.js"></script>
+    <script src="assets/js/lang.js"></script>
+    <script src="assets/js/load.js"></script>
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/structure.js"></script>
+</body>
+
+</html>
