@@ -141,23 +141,23 @@ window.addEventListener('load', () => {
         web.init('changelog');
         console.log('changelog');
     }
-    else if (location === '/register.html') {
-        console.log('register');
-    }
-    else if (location === '/login.html') {
-        console.log('login');
-    }
-    else if (location === '/index.html') {
-        console.log('index');
-    }
-    else if (location === '/privacy.html') {
-        console.log('privacy');
-    }
-    else {
-        // parse url
-        console.log(location);
-        setTimeout(() => {
-            window.location.href = '/index.html';
-        }, 1000);
-    }
+    //else if (location === '/register.html') {
+    //    console.log('register');
+    //}
+    //else if (location === '/login.html') {
+    //    console.log('login');
+    //}
+    //else if (location === '/index.html') {
+    //    console.log('index');
+    //}
+    //else if (location === '/privacy.html') {
+    //    console.log('privacy');
+    //}
+    //else {
+    //    // parse url
+    //    console.log(location);
+    //    setTimeout(() => {
+    //        window.location.href = '/index.html';
+    //    }, 1000);
+    //}
 });
