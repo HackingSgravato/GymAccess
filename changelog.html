@@ -30,11 +30,24 @@
 
 <body>
     <div class="body-container">
-        <p class="body-title">Welcome, you have to login first.</p><p class="body-subtitle">Join to save your data and use it across your devices, but read <a href="privacy.html">here</a> before.</p>
-        <div class="body-btn-group"><a class="body-btn first" href="login.html">Login</a><a class="body-btn second" href="register.html">Register</a></div>
-        <p class="body-footer-description">Made with love by Paolo</p>
-        <div class="body-footer-social-container"><a class="body-footer-social" href="https://github.com/HackingSgravato" target="_blank">Follow me on GitHub&nbsp;<i class="fab fa-github"></i></a></div>
-        <div><br><a class="temp-btn" href="fitness.html">Join without login (Temporary)</a></div>
+        <div class="body-header"><a class="body-header-container" href="index.html"><img class="logo" src="assets/img/icons8-dumbbell-windows-11-color-32.png"><span class="body-header-title">Home</span></a><a class="body-header-container" href="fitness.html"><img class="logo" src="https://img.icons8.com/fluency/48/000000/sports-mode.png"/><span class="body-header-title">Fitness</span></a></div><br>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Exercise</th>
+                        <th>Old Reps</th>
+                        <th>New Reps</th>
+                        <th>Old Sets</th>
+                        <th>New Sets</th>
+                        <th>Old Weight</th>
+                        <th>New Weight</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

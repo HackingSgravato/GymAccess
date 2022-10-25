@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GymAccess Remake</title>
+    <meta name="theme-color" content="#141414">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="assets/img/icons8-dumbbell-windows-11-color-180.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/icons8-dumbbell-windows-11-color-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/icons8-dumbbell-windows-11-color-32.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="assets/img/icons8-dumbbell-windows-11-color-180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/img/icons8-dumbbell-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/icons8-dumbbell-512.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/button-materialize-materialize.min.css">
+    <link rel="stylesheet" href="assets/css/button-materialize.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Basic-icons.css">
+    <link rel="stylesheet" href="assets/css/Material-Inputs-material-input.css">
+    <link rel="stylesheet" href="assets/css/Material-Inputs-ripple.css">
+    <link rel="stylesheet" href="assets/css/Material-Inputs-style.css">
+    <link rel="stylesheet" href="assets/css/Material-Inputs-validation.css">
+    <link rel="stylesheet" href="assets/css/Material-Inputs.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div><a id="confirm-export" class="body-header-container extra-widget" onclick="this.style.display = &#39;none&#39;;"><img class="logo" src="https://img.icons8.com/fluency/32/000000/checked.png"/><span class="body-header-title">Confirm Export</span></a></div>
+    <div class="body-container">
+        <div class="body-header"><a class="body-header-container" href="index.html"><img class="logo" src="assets/img/icons8-dumbbell-windows-11-color-32.png"><span class="body-header-title">Home</span></a><a class="body-header-container" href="changelog.html"><img class="logo" src="https://img.icons8.com/fluency/32/000000/financial-changes.png"/><span class="body-header-title">Changelog</span></a></div>
+        <div class="body-header body-toolbar">
+            <div><a class="body-header-container toolbar"><img class="logo" src="https://img.icons8.com/fluency/32/000000/download.png"/><span class="body-header-title">Import</span><input type="file" class="file-input" onchange="importJson(this);"></a></div><a class="body-header-container toolbar" onclick="exportJson();"><img class="logo" src="https://img.icons8.com/fluency/32/000000/upload--v16.png"/><span class="body-header-title">Export</span></a><a class="body-header-container toolbar" onclick="shareJson();"><img class="logo" src="https://img.icons8.com/fluency/32/000000/share--v2.png"/><span class="body-header-title">Share</span></a><a class="body-header-container toolbar" onclick="db.clear();"><img class="logo" src="https://img.icons8.com/fluency/32/000000/filled-trash.png"/><span class="body-header-title">Delete</span></a>
+        </div>
+        <div class="body-header body-toolbar"><a class="waves-effect waves-dark btn body-header-container toolbar edit-btn" onclick="eraseEditInputs();"><img class="logo" src="https://img.icons8.com/fluency/32/000000/eraser.png"/><span class="body-header-title edit-span">Clear Form</span></a><input type="text" id="day-input" class="body-header-container toolbar edit" placeholder="Day"><input type="text" id="exercise-input" class="body-header-container toolbar edit" placeholder="Exercise"><input type="text" id="reps-input" class="body-header-container toolbar edit" placeholder="Reps"><input type="text" id="sets-input" class="body-header-container toolbar edit" placeholder="Sets"><input type="text" id="weight-input" class="body-header-container toolbar edit" placeholder="Weight (Kg)"><a data-bs-toggle="tooltip" data-bss-tooltip="" class="waves-effect waves-dark btn body-header-container toolbar edit-btn" onclick="editDb();" title="You can't edit the day of an exercise nor the exercise name. Use remove button and create a new one instead."><img class="logo" src="https://img.icons8.com/fluency/32/000000/edit.png"/><span class="body-header-title edit-span">Edit</span></a><a data-bs-toggle="tooltip" data-bss-tooltip="" class="waves-effect waves-dark btn body-header-container toolbar edit-btn" onclick="removeItemDb();" title="Just day and/or exercise name needed."><img class="logo" src="https://img.icons8.com/fluency/32/000000/delete-forever.png"/><span class="body-header-title edit-span">Remove</span></a></div>
+        <div class="table-responsive" id="table">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Exercise</th>
+                        <th>Reps</th>
+                        <th>Sets</th>
+                        <th>Weight (Kg)</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/button-materialize.js"></script>
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/Material-Inputs.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/web.js"></script>
+</body>
+
+</html>

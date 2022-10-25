@@ -1,121 +1,145 @@
-function getChangelog() {
-    return getDatabase()['changelog'];
-}
+class Db {
+    clear() {
+        localStorage.clear();
+        window.location.reload();
+    }
+    import(json) {
+        this.update(json);
+    }
+    export() {
+        return JSON.stringify(this.retrieve());
+    }
+    edit({ dayName, exerciseName, sets, reps, weight }) {
+        const db = this.retrieve();
+        let day = db.days.find(day => day.name === dayName);
 
-function deleteDatabase(){
-    localStorage.removeItem('database');
-    reloadPage();
-}
+        // capitalize first letter and lowercase the rest
+        dayName = dayName.charAt(0).toUpperCase() + dayName.slice(1).toLowerCase();
 
-function getDatabase() {
-    tryCreateDatabase();
-    return JSON.parse(localStorage.getItem('database'));
-}
+        if (!day) {
+            db.days.push({
+                name: dayName,
+                exercises: []
+            });
+            this.update(db, false);
+            day = db.days.find(day => day.name === dayName);
+        }
 
-function tryCreateDatabase() {
-    const database = {
-        days: [
-            {
-                name: "Monday",
-                exercises: []
-            },
-            {
-                name: "Tuesday",
-                exercises: []
-            },
-            {
-                name: "Wednesday",
-                exercises: []
-            },
-            {
-                name: "Thursday",
-                exercises: []
-            },
-            {
-                name: "Friday",
-                exercises: []
-            },
-            {
-                name: "Saturday",
-                exercises: []
-            },
-            {
-                name: "Sunday",
-                exercises: []
+        let exercise = day.exercises.find(exercise => exercise.name === exerciseName);
+
+        if (!exercise) {
+            day.exercises.push({
+                name: exerciseName,
+                sets: sets,
+                reps: reps,
+                weight: weight
+            });
+            this.update(db, false);
+            exercise = day.exercises.find(exercise => exercise.name === exerciseName);
+        }
+
+        const oldSets = exercise.sets;
+        const oldReps = exercise.reps;
+        const oldWeight = exercise.weight;
+
+        const newlog = {
+            exerciseName,
+        }
+
+        if (oldReps != reps) {
+            exercise.reps = reps;
+            newlog.oldReps = oldReps;
+            newlog.newReps = reps;
+        }
+        if (oldSets != sets) {
+            exercise.sets = sets;
+            newlog.oldSets = oldSets;
+            newlog.newSets = sets;
+        }
+        if (oldWeight != weight) {
+            exercise.weight = weight;
+            newlog.oldWeight = oldWeight;
+            newlog.newWeight = weight;
+        }
+
+        if (newlog.oldReps || newlog.oldSets || newlog.oldWeight) {
+            this.update(db, false);
+            this.log(newlog);
+            return;
+        }
+
+        this.update(db);
+    }
+    remove({ dayName, exerciseName }) {
+        if (exerciseName) {
+            const db = this.retrieve();
+            const day = db.days.find(day => day.name === dayName);
+            // if day exists
+            if (day) {
+                const exercise = day.exercises.find(exercise => exercise.name === exerciseName);
+                // if exercise exists
+                if (exercise) {
+                    // if exercise is the only one in the day
+                    if (day.exercises.length === 1) {
+                        // remove day
+                        db.days = db.days.filter(day => day.name !== dayName);
+                    } else {
+                        // remove exercise
+                        day.exercises = day.exercises.filter(exercise => exercise.name !== exerciseName);
+                    }
+                    this.update(db);
+                }
             }
-        ],
-        changelog: []
-    };
-
-    if (!localStorage.getItem('database')) {
-        saveNewDatabase(database);
+        }
+        else {
+            const db = this.retrieve();
+            db.days = db.days.filter(day => day.name != dayName);
+            this.update(db);
+        }
     }
-}
+    log({ exerciseName, oldSets, newSets, oldReps, newReps, oldWeight, newWeight }) {
+        const newLog = {
+            exerciseName: exerciseName,
+            date: new Date().toLocaleString(),
+        }
+        if (oldSets && newSets) {
+            newLog.oldSets = oldSets;
+            newLog.newSets = newSets;
+        }
+        if (oldReps && newReps) {
+            newLog.oldReps = oldReps;
+            newLog.newReps = newReps;
+        }
+        if (oldWeight && newWeight) {
+            newLog.oldWeight = oldWeight;
+            newLog.newWeight = newWeight;
+        }
 
-function saveNewDatabase(database, reload = true) {
-    localStorage.setItem('database', JSON.stringify(database));
-    if (reload == false){
-        return;
+        const db = this.retrieve();
+        db.logs.push(newLog);
+        this.update(db, false);
     }
-    reloadPage();
-}
-
-function updateExerciseWeight(exercise, day, newWeight) {
-    const database = getDatabase();
-    const dayIndex = database['days'].findIndex((d) => d.name === day.name);
-    const exerciseIndex = database['days'][dayIndex].exercises.findIndex((e) => e.name === exercise.name);
-    const oldWeight = database['days'][dayIndex].exercises[exerciseIndex].weight;
-    database['days'][dayIndex].exercises[exerciseIndex].weight = newWeight
-
-    saveNewDatabase(database, false);
-
-    // Informations about update
-    const exerciseName = database['days'][dayIndex].exercises[exerciseIndex].name;
-
-    const change = {
-        date: new Date().toLocaleDateString(),
-        exerciseName: exerciseName,
-        oldWeight: oldWeight,
-        newWeight: newWeight
-    };
-    
-    saveChangelog(change);
-}
-
-function saveChangelog(change) {
-    const database = getDatabase();
-    database['changelog'].push(change);
-    saveNewDatabase(database);
-}
-
-function removeDay(){
-    const database = this.getDatabase();
-    const dayIndex = database['days'].findIndex((d) => d.name === day.name);
-    database['days'].splice(dayIndex, 1);
-
-    saveNewDatabase(database);
-}
-
-function removeExercise(exercise, day) {
-    const database = getDatabase();
-    const dayIndex = database['days'].findIndex((d) => d.name === day.name);
-    const exerciseIndex = database['days'][dayIndex].exercises.findIndex((e) => e.name === exercise.name);
-    database['days'][dayIndex].exercises.splice(exerciseIndex, 1);
-
-    saveNewDatabase(database);
-}
-
-function addDay(day) {
-    const database = getDatabase();
-    database['days'].push(day);
-
-    saveNewDatabase(database);
-}
-
-function addExercise(exercise, day) {
-    const database = getDatabase();
-    const dayIndex = database['days'].findIndex((d) => d.name === day.name);
-    database['days'][dayIndex].exercises.push(exercise);
-
-    saveNewDatabase(database);
+    update(db, reload = true) {
+        localStorage.setItem('db', JSON.stringify(db));
+        if (reload) {
+            window.location.reload();
+        }
+    }
+    retrieve() {
+        let db = localStorage.getItem('db');
+        if (db) {
+            return this.toJson(db);
+        }
+        else {
+            const template = {
+                days: [],
+                logs: []
+            };
+            localStorage.setItem('db', JSON.stringify(template));
+            return template
+        }
+    }
+    toJson(db) {
+        return JSON.parse(db);
+    }
 }
