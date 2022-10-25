@@ -130,6 +130,7 @@ let web;
 
 // window events
 window.addEventListener('load', () => {
+    console.log("a");
     db = new Db();
     web = new Web();
 
@@ -137,12 +138,15 @@ window.addEventListener('load', () => {
     const location = window.location.pathname;
     const page = location.substring(location.lastIndexOf("/") + 1);
 
-    if (page == 'changelog.html') {
-        web.init('changelog');
-        return;
+    if (page == 'index.html'){
+        web.init('fitness');
     }
-
-    web.init('fitness');
+    else if (page == 'changelog.html') {
+        web.init('changelog');
+    }
+    else{
+        window.location.href = 'index.html';
+    }
 
     //else if (location === '/register.html') {
     //    console.log('register');
