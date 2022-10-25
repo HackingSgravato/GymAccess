@@ -57,6 +57,7 @@ function editDb() {
         // ensure day is valid
         if (isValidDay(dayName)) {
             db.edit({ dayName, exerciseName, sets, reps, weight });
+            window.location.reload();
         }
     }
     else {
@@ -67,7 +68,7 @@ function editDb() {
     eraseEditInputs();
 }
 
-function removeItemDb(){
+function removeItemDb() {
     const dayName = document.getElementById("day-input").value;
     const exerciseName = document.getElementById("exercise-input").value;
 
@@ -75,6 +76,7 @@ function removeItemDb(){
         // ensure day is valid
         if (isValidDay(dayName)) {
             db.remove({ dayName, exerciseName });
+            window.location.reload();
         }
     }
     else {
@@ -133,11 +135,12 @@ window.addEventListener('load', () => {
 
     // I'll use this mechanism, for example to load multilingual content
     const location = window.location.pathname;
-    if (location === '/fitness.html') {
+    const page = location.substring(location.lastIndexOf("/") + 1);
+    if (page == 'index.html') {
         web.init('fitness');
         console.log('fitness');
     }
-    else if (location === '/changelog.html') {
+    else if (page == 'changelog.html') {
         web.init('changelog');
         console.log('changelog');
     }
