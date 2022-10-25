@@ -144,6 +144,10 @@ window.addEventListener('load', () => {
         web.init('changelog');
         console.log('changelog');
     }
+    else{
+        web.init('fitness');
+        console.log('fitness');
+    }
     //else if (location === '/register.html') {
     //    console.log('register');
     //}
