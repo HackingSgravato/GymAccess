@@ -136,18 +136,14 @@ window.addEventListener('load', () => {
     // I'll use this mechanism, for example to load multilingual content
     const location = window.location.pathname;
     const page = location.substring(location.lastIndexOf("/") + 1);
-    if (page == 'index.html') {
-        web.init('fitness');
-        console.log('fitness');
-    }
-    else if (page == 'changelog.html') {
+
+    if (page == 'changelog.html') {
         web.init('changelog');
-        console.log('changelog');
+        return;
     }
-    else{
-        web.init('fitness');
-        console.log('fitness');
-    }
+
+    web.init('fitness');
+
     //else if (location === '/register.html') {
     //    console.log('register');
     //}
